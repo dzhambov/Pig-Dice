@@ -8,11 +8,46 @@
   <title>Oink</title>
 </head>
 <body>
-  <div id="roll">
-    <button class="btn btn-danger">Roll</button>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+              <h2>Player 1</h2>
+          </div>
+          <div class="panel-body">
+            <h2>Score: <span class="PlayerOneScore"></span></h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+              <h2>Computer </h2>
+          </div>
+          <div class="panel-body">
+            <h2>Score: <span class="EvilComputerScore"></span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div id="roll">
+        <button class="btn btn-danger">Roll</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div id="rollscore">
+        <h2>Your Score: <span class="rollscore"></span></h2>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div id="hold">
+        <button class="btn btn-success">Hold</button>
+      </div> 
+    </div>
   </div>
-  <div id="hold">
-    <button class="btn btn-success">Hold</button>
-  </div> 
+</div>
 </body>
 </html>

@@ -15,7 +15,8 @@ gameObj.prototype.addPlayer = function(player) {
   }
 
 //Player/Computer Objects
-function playerObj() {
+function playerObj(name) {
+  this.name = name,
   this.total = 0
 }
 
@@ -26,8 +27,12 @@ function diceRoll() {
 
 function pass(idNumber) {
   if (idNumber === 1) {
+    $("span.PlayerOneScore").addClass("turn");
+    $("span.EvilComputerScore").removeClass("turn");
     return 1;
   } else {
+    $("span.EvilComputerScore").addClass("turn");
+    $("span.PlayerOneScore").removeClass("turn");
     return 0;
   }
 }
@@ -35,8 +40,8 @@ function pass(idNumber) {
 //UI
 $(document).ready(function(){
   var Game = new gameObj();
-  var playerOne = new playerObj();
-  var playerComp = new playerObj();
+  var playerOne = new playerObj("PlayerOne");
+  var playerComp = new playerObj("EvilComputer");
   var score = 0;
   var playerNum = 0;
   var currentPlayer;
@@ -48,20 +53,30 @@ $(document).ready(function(){
     var roll = diceRoll();
     if (roll === 1) {
       score = 0;
+      $(".rollscore").text(score);
       currentPlayer = Game.players[playerNum];
       playerNum = pass(currentPlayer.id)
-      console.log("Player:"+currentPlayer.id);
     } else {
       score += roll;
-      console.log("Roll:"+roll);
-      console.log("Score:"+score);
+      $(".rollscore").text(score);
     }
   });
 
   $("#hold").click(function(){
     currentPlayer = Game.players[playerNum];
     currentPlayer.total += score;
+    if (currentPlayer.total >= 100) {
+      alert (currentPlayer.name + "WIN!!!!")
+    }
+    console.log(currentPlayer.name);
+    console.log(currentPlayer.name === "PlayerOne");
+    if (currentPlayer.name === "PlayerOne") {
+      $(".PlayerOneScore").text(currentPlayer.total);
+    } else {
+      $(".EvilComputerScore").text(currentPlayer.total);
+    }
     score = 0;
     playerNum = pass(currentPlayer.id)
+    $(".rollscore").text(score);
   });
 });
