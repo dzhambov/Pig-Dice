@@ -37,46 +37,61 @@ function pass(idNumber) {
   }
 }
 
+
 //UI
 $(document).ready(function(){
   var Game = new gameObj();
   var playerOne = new playerObj("PlayerOne");
   var playerComp = new playerObj("EvilComputer");
   var score = 0;
-  var playerNum = 0;
-  var currentPlayer;
-
   Game.addPlayer(playerComp);
   Game.addPlayer(playerOne);
-
-  $("#roll").click(function(){
+  var playerNum = 1;
+  var currentPlayer = Game.players[playerNum];
+  
+  function Roll() {
     var roll = diceRoll();
     if (roll === 1) {
       score = 0;
       $(".rollscore").text(score);
+      // Hold();
       currentPlayer = Game.players[playerNum];
-      playerNum = pass(currentPlayer.id)
+      playerNum = pass(currentPlayer.id);
     } else {
       score += roll;
       $(".rollscore").text(score);
     }
-  });
+  }
 
-  $("#hold").click(function(){
+  function Hold(){
     currentPlayer = Game.players[playerNum];
     currentPlayer.total += score;
     if (currentPlayer.total >= 100) {
-      alert (currentPlayer.name + "WIN!!!!")
-    }
-    console.log(currentPlayer.name);
-    console.log(currentPlayer.name === "PlayerOne");
-    if (currentPlayer.name === "PlayerOne") {
+      alert (currentPlayer.name + "WIN!!!!");
+    } else if (currentPlayer.name === "PlayerOne") {
       $(".PlayerOneScore").text(currentPlayer.total);
     } else {
       $(".EvilComputerScore").text(currentPlayer.total);
     }
     score = 0;
-    playerNum = pass(currentPlayer.id)
+    playerNum = pass(currentPlayer.id);
     $(".rollscore").text(score);
+    console.log(currentPlayer.name);
+  }
+
+  function Comp(){
+      for (var turn = 1; turn < 3; turn++){
+        Roll();
+      }
+      Hold();
+    }
+
+  $("#roll").click(function(){
+    Roll();
+  });
+
+  $("#hold").click(function(){
+    Hold();
+    // Comp();
   });
 });
