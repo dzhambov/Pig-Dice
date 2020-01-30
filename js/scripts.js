@@ -27,12 +27,12 @@ function diceRoll() {
 
 function pass(idNumber) {
   if (idNumber === 1) {
-    $("span.PlayerOneScore").addClass("turn");
-    $("span.EvilComputerScore").removeClass("turn");
+    $("div.player").addClass("turn");
+    $("div.computer").removeClass("turn");
     return 1;
   } else {
-    $("span.EvilComputerScore").addClass("turn");
-    $("span.PlayerOneScore").removeClass("turn");
+    $("div.computer").addClass("turn");
+    $("div.player").removeClass("turn");
     return 0;
   }
 }
@@ -48,6 +48,7 @@ $(document).ready(function(){
   Game.addPlayer(playerOne);
   var playerNum = 1;
   var currentPlayer = Game.players[playerNum];
+  $("div.player").addClass("turn");
   
   function Roll() {
     var roll = diceRoll();
